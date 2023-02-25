@@ -23,6 +23,6 @@ class Doctor extends Model
 
     public function srevice()
     {
-        $this->belongsToMany(Service::class,'doctor_services')
+        $this->belongsToMany(Service::class,'doctor_services');
     }
 }
