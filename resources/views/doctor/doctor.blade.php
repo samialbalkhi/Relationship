@@ -15,6 +15,8 @@
             <th scope="col">#</th>
             <th scope="col">name</th>
             <th scope="col">title</th>
+            <th scope="col">action</th>
+
           </tr>
         </thead>
         <tbody>
@@ -24,10 +26,15 @@
                 <th scope="row">{{$doctors->id}}</th> 
                 <td>{{$doctors->name}}</td>
                 <td>{{$doctors->title}}</td>
+                <td><a href="{{route('get_doctors_services',$doctors->id)}}" class="btn btn-success">view servicre</a></td>
+      
             </tr>
             @endforeach
         </tbody>
       </table>
+      
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>
+
+

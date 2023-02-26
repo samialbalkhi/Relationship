@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
+use App\Models\Service;
 use App\Models\Hospital;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Command\DumpCompletionCommand;
@@ -73,4 +74,39 @@ class DoctorController extends Controller
 
          return response('deleted successfully');
     }
+    public function doctor_services()
+    {
+        $doctor=Doctor::with('srevice')->find(5);
+        return $doctor;
+    }   
+    public function services_doctor()
+    {
+        $doctor=Service::with('doctor')-> find(1);
+        return $doctor;
+    }
+    public function get_doctors_services($id)
+    {
+        $doctor=Doctor::find($id);
+        $srevice=$doctor->srevice;
+
+        $doctors=Doctor::select('id','name')->get();
+        $srevices=Service::select('id','name')->get();
+
+    
+        return view('doctor.srevice', compact(['srevice','doctors','srevices']));
+
+    }
+
+    public function save_services_todoctor(Request $request)
+    {
+        $doctor=Doctor::find($request->doctor);
+
+        //sync Add delete old
+        //attach   insert 
+        //syncwithoutdetaching   Add a new one without deleting the old one
+        $doctor->srevice()->syncwithoutdetaching($request->srevices);
+        
+        return 'success';
+    }
+    
 }
